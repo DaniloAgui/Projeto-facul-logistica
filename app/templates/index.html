@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Pedidos · Gestão Logística{% endblock %}
+{% block content %}
+<section class="page-heading">
+  <div><p class="eyebrow">VISÃO OPERACIONAL</p><h1>Consulta de pedidos</h1><p class="muted">Encontre rapidamente pedidos por identificador, região ou canal de venda.</p></div>
+  <div class="heading-stat"><span class="stat-number">{{ pedidos|length }}</span><span class="muted">resultado(s)</span></div>
+</section>
+<section class="card search-card">
+  <form method="get" class="filter-grid">
+    <div class="field"><label for="identificador">Identificador do pedido</label><input id="identificador" name="identificador" value="{{ filtros.identificador }}" placeholder="Ex.: 1001"></div>
+    <div class="field"><label for="regiao">Região</label><select id="regiao" name="regiao"><option value="">Todas as regiões</option>{% for item in regioes %}<option value="{{ item }}" {% if filtros.regiao == item %}selected{% endif %}>{{ item }}</option>{% endfor %}</select></div>
+    <div class="field"><label for="canal">Canal de venda</label><select id="canal" name="canal"><option value="">Todos os canais</option>{% for item in canais %}<option value="{{ item }}" {% if filtros.canal == item %}selected{% endif %}>{{ item }}</option>{% endfor %}</select></div>
+    <button class="button button-primary" type="submit">⌕ Pesquisar</button>
+  </form>
+</section>
+<section class="card table-card">
+  <div class="card-header"><div><h2>Pedidos cadastrados</h2><p class="muted">Acompanhe o status atual das entregas.</p></div><a class="button button-secondary" href="{{ url_for('main.novo_pedido') }}">＋ Cadastrar pedido</a></div>
+  {% if pedidos %}
+  <div class="table-wrap"><table><thead><tr><th>Pedido</th><th>Destinatário</th><th>Região</th><th>Canal de venda</th><th>Status</th><th>Ação</th></tr></thead><tbody>
+  {% for pedido in pedidos %}<tr><td><a class="order-id" href="{{ url_for('main.detalhe_pedido', identificador=pedido.identificador) }}">#{{ pedido.identificador }}</a></td><td>{{ pedido.destinatario }}</td><td>{{ pedido.regiao.nome }}</td><td>{{ pedido.canal_venda }}</td><td><span class="status status-{{ pedido.status|lower|replace(' ', '-') }}">{{ pedido.status }}</span></td><td><a class="details-link" href="{{ url_for('main.detalhe_pedido', identificador=pedido.identificador) }}">Ver detalhes →</a></td></tr>{% endfor %}
+  </tbody></table></div>
+  {% else %}<div class="empty-state"><span class="empty-icon">⌕</span><h2>Nenhum pedido encontrado</h2><p class="muted">Tente ajustar os filtros ou cadastre um novo pedido.</p><a class="button button-primary" href="{{ url_for('main.novo_pedido') }}">Cadastrar pedido</a></div>{% endif %}
+</section>
+{% endblock %}

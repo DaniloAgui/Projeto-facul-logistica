@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Novo pedido · Gestão Logística{% endblock %}
+{% block content %}
+<div class="breadcrumb"><a href="{{ url_for('main.index') }}">Pedidos</a><span> / </span>Novo pedido</div>
+<section class="page-heading compact"><div><p class="eyebrow">CADASTRO</p><h1>Novo pedido</h1><p class="muted">Preencha as informações para iniciar o acompanhamento logístico.</p></div></section>
+<form method="post" class="form-layout">
+<section class="card form-card"><h2>Dados do pedido</h2><div class="form-grid">
+  <div class="field"><label for="identificador">Identificador</label><input id="identificador" value="Gerado automaticamente" disabled></div>
+  <div class="field"><label for="destinatario">Destinatário <span class="required">*</span></label><input id="destinatario" name="destinatario" value="{{ form.get('destinatario', '') }}" required></div>
+  <div class="field field-wide"><label for="destino">Destino <span class="required">*</span></label><input id="destino" name="destino" value="{{ form.get('destino', '') }}" placeholder="Rua, número e complemento" required></div>
+  <div class="field"><label for="regiao">Região <span class="required">*</span></label><select id="regiao" name="regiao" required><option value="">Selecione</option>{% for item in regioes %}<option value="{{ item }}" {% if form.get('regiao') == item %}selected{% endif %}>{{ item }}</option>{% endfor %}</select></div>
+  <div class="field"><label for="canal_venda">Canal de venda <span class="required">*</span></label><select id="canal_venda" name="canal_venda" required><option value="">Selecione</option>{% for item in canais %}<option value="{{ item }}" {% if form.get('canal_venda') == item %}selected{% endif %}>{{ item }}</option>{% endfor %}</select></div>
+  <div class="field"><label for="status">Status <span class="required">*</span></label><select id="status" name="status" required>{% for item in status_permitidos %}<option value="{{ item }}" {% if form.get('status', 'Pendente') == item %}selected{% endif %}>{{ item }}</option>{% endfor %}</select></div>
+  <div class="field field-wide"><label for="descricao_volume">Descrição do volume <span class="required">*</span></label><input id="descricao_volume" name="descricao_volume" value="{{ form.get('descricao_volume', '') }}" placeholder="Ex.: Caixa média - acessórios" required></div>
+</div></section>
+<section class="card form-card"><h2>Ocorrência inicial <span class="optional">opcional</span></h2><div class="form-grid">
+  <div class="field"><label for="tipo_ocorrencia">Tipo de ocorrência</label><select id="tipo_ocorrencia" name="tipo_ocorrencia"><option value="">Nenhuma</option>{% for item in tipos_ocorrencia %}<option value="{{ item }}">{{ item }}</option>{% endfor %}</select></div>
+  <div class="field field-wide"><label for="descricao_ocorrencia">Descrição da ocorrência</label><textarea id="descricao_ocorrencia" name="descricao_ocorrencia" rows="3"></textarea></div>
+  <div class="field field-wide"><label for="providencia">Providência adotada</label><textarea id="providencia" name="providencia" rows="3"></textarea></div>
+</div><div class="form-actions"><a class="button button-secondary" href="{{ url_for('main.index') }}">Cancelar</a><button class="button button-primary" type="submit">Salvar pedido</button></div></section>
+</form>
+{% endblock %}
