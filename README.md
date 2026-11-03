@@ -55,3 +55,30 @@ Em cada tela, use **Windows + Shift + S**, selecione a área do navegador e salv
 ## Escopo
 
 O MVP não implementa GPS em tempo real, otimização de rotas, integrações com marketplaces ou sistemas corporativos, aplicativo móvel ou funções financeiras.
+
+
+
+
+## Validação do MVP
+
+O protótipo Gestão Logística permite cadastrar pedidos, consultar registros por identificador, região e canal de venda, acompanhar o status das entregas e registrar ocorrências.
+
+### Objetivo da revisão
+
+Documentar as funcionalidades centrais do MVP e organizar os próximos passos para validação com um representante da empresa parceira.
+
+### Escopo atual
+
+- Cadastro de pedidos com dados fictícios.
+- Consulta e filtragem de pedidos.
+- Atualização de status e histórico de acompanhamento.
+- Registro de ocorrências e providências adotadas.
+
+### Limitações
+
+Esta versão é um protótipo acadêmico. Não possui integração com sistemas externos, rastreamento GPS ou otimização automática de rotas.
+
+### Próxima etapa
+
+Executar testes com tarefas operacionais, registrar as dificuldades observadas e priorizar melhorias de usabilidade, acessibilidade e segurança.
+
